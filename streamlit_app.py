@@ -29,7 +29,7 @@ fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit}")
 streamlit.text(fruityvice_response)
 
 # Normalize the json file
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Display normalized data
 streamlit.dataframe(fruityvice_normalized)
 
