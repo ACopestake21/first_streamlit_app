@@ -28,8 +28,7 @@ streamlit.write('The user entered ', fruit_choice)
 # API Request
 streamlit.header("Fruityvice Fruit Advice!")
 import requests
-fruit = 'kiwi'
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit}")
+fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
 streamlit.text(fruityvice_response)
 
 # Normalize the json file
