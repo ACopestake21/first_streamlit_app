@@ -43,7 +43,7 @@ except URLError as e:
         streamlit.error()
 
 
-streamlit.text(fruityvice_response)
+
 streamlit.stop()
 
 
