@@ -39,8 +39,9 @@ try:
       fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
       fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
       streamlit.dataframe(fruityvice_normalized)
-      
-streamlit.text(fruityvice_response)
+
+
+# streamlit.text(fruityvice_response)
 streamlit.stop()
 
 
