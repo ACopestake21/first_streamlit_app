@@ -18,15 +18,17 @@ fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 streamlit.dataframe(fruits_to_show)
+
 # Get user's fruit choice
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{this_fruit_choice}")
     fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
     return fruityvice_normalized
+
 # New section to display API response
 streamlit.header("Fruityvice Fruit Advice!")
 try:
-    fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+    fruit_choice = streamlit.text_input('What fruit would you like information about?')
     if not fruit_choice:
       streamlit.error("Please select a fruit to get information.")
     else:
@@ -35,25 +37,23 @@ try:
 except URLError as e:
         streamlit.error()
 
-# Stop streamlit
-streamlit.stop()
-
-
-
-
-#####
 streamlit.header("The fruit load list contains:")
 # Snowflake related functions
 def get_fruit_load_list():
     with my_cnx.cursor() as my_cur:
         my_cur.execute("select * from fruit_load_list")
         return my_cur.fetchall()
-        
+    
+# Add a button to load the fruit
 if streamlit.button('Get Fruit Load List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_fruit_load_list()
     streamlit.dataframe(my_data_rows)
+
     
+
+# Stop streamlit
+streamlit.stop()
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
 streamlit.write('The user entered ', add_my_fruit)
 # This will not work correclty but just go with it for now
